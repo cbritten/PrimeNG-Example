@@ -25,11 +25,37 @@ import { AppMenuModule } from '../layout//menu/app.menu.module';
 import { AppNewsModule } from '../layout/news/app.news.module';
 import { AppTopbarModule } from '../layout/topbar/app.topbar.module';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { MenubarModule } from 'primeng/menubar';
+import { HorizontalMenuComponent } from './horizontal-menu/horizontal-menu.component';
 
 @NgModule({
-    declarations: [AppComponent, AppFooterComponent, AppMainComponent],
-    imports: [BrowserModule.withServerTransition({ appId: 'primeng' }), AppRoutingModule, FormsModule, ReactiveFormsModule, AppNewsModule, HttpClientModule, BrowserAnimationsModule, LandingModule, AppConfigModule, AppTopbarModule, AppMenuModule],
-    providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }, CarService, CountryService, EventService, NodeService, IconService, CustomerService, PhotoService, AppConfigService, ProductService],
+    declarations: [AppComponent, AppFooterComponent, AppMainComponent, HorizontalMenuComponent],
+    imports: [
+        BrowserModule.withServerTransition({ appId: 'primeng' }), 
+        AppRoutingModule, 
+        FormsModule, 
+        ReactiveFormsModule, 
+        AppNewsModule, 
+        HttpClientModule, 
+        BrowserAnimationsModule, 
+        LandingModule, 
+        AppConfigModule, 
+        AppTopbarModule, 
+        AppMenuModule,
+        MenubarModule,
+    ],
+    providers: [
+        { provide: LocationStrategy, useClass: PathLocationStrategy }, 
+        CarService, 
+        CountryService, 
+        EventService, 
+        NodeService, 
+        IconService, 
+        CustomerService, 
+        PhotoService, 
+        AppConfigService, 
+        ProductService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

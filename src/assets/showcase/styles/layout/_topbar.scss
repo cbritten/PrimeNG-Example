@@ -3,17 +3,18 @@
     height: 5rem;
     position: fixed;
     top: 0;
-    left: 250px;
-    width: calc(100% - 250px);
+    background: var(--primary-color);
+    color: var(--primary-color-text);
+    width: 100%;
     z-index: 1100;
     transition: background-color 1s;
 
     .layout-topbar-inner {
         height: 100%;
         display: flex;
-        align-items: center;
+        align-items: end;
         justify-content: space-between;
-        padding: 0 4rem;
+        padding: 0 2rem;
     }
 
     &.layout-topbar-sticky {

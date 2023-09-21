@@ -1,10 +1,8 @@
-<aside class="layout-sidebar" [ngClass]="{'active' : active}">
-    <a [routerLink]="['/']" class="logo">
-        <img alt="logo" [src]="'https://primefaces.org/cdn/primeng/images/' + (config.dark ? 'primeng-logo-light.svg' : 'primeng-logo-dark.svg')" height="41" />
-    </a>
-    <nav>
-        <ol class="layout-menu">
-            <li *ngFor="let item of menu; let i = index;" app-menuitem [item]="item" [root]="true"></li>
-        </ol>
-    </nav>
-</aside>
+<div class="layout-sidebar">
+    <!-- <ul class="layout-menu">
+        <li *ngFor="let item of menuItems; let i=index;" class="side-bar-icon">
+            <i pTooltip="{{item.label}}" class="{{item.class}}"><a href="{{item.routerLink}}" (click)="menu.toggle($event)"></a></i>
+            <p-menu #menu [popup]="true" model="item.items"></p-menu>
+        </li>
+    </ul> -->
+</div>

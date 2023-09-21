@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="grid pt-3">
+        <div class="col-6 md:col-6">
+            <h6 class="flex justify-content-center">Music Festival Ticket Sales (in thousands)</h6>
+            <p-chart class="block m-auto w-8" type="line" [data]="lineChartData" [options]="lineChartOptions"></p-chart>
+        </div>
+        <div class="col-4 md:col-4">
+            <p-chart class="h-full" type="line" [data]="comboChartData" [options]="comboChartOptions"></p-chart>
+        </div>
+    </div>
+    <button pButton pRipple class="pi pi-cog icon-button flex ml-auto" (click)="filterMenu.show($event)"></button>
+</div>
+
+<!-- -----------------------------------------------
+------------POPUPS START HERE------------------
+----------------------------------------------- -->
+<p-overlayPanel #filterMenu styleClass="w-4">
+    <div class="flex">
+        <h3 class="text-primary flex align-items-end">Line Chart Options</h3>
+        <h3 class="text-primary ml-auto">Combo Chart Options</h3>
+    </div>
+    <hr>
+    <div class="grid">
+        <div class="col-6 flex">
+            <span class="mr-2 flex mt-2">Chart Legend Position</span> 
+            <p-selectButton [options]="justifyOptions" [(ngModel)]="lineChartLegendPosition" (onChange)="setChartOptions()">
+                <ng-template let-value pTemplate>
+                    <i [class]="value.class"></i>
+                </ng-template>
+            </p-selectButton>
+        </div>
+        <div class="col-6 flex justify-content-end">
+            <span class="mr-2 flex mt-2">Chart Legend Position</span> 
+            <p-selectButton [options]="justifyOptions" [(ngModel)]="comboChartLegendPosition" (onChange)="setChartOptions()">
+                <ng-template let-value pTemplate>
+                    <i [class]="value.class"></i>
+                </ng-template>
+            </p-selectButton>
+        </div>
+    </div>
+    <hr>
+    <div class="grid">
+        
+    </div>
+</p-overlayPanel>

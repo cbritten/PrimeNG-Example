@@ -9,7 +9,9 @@ import { AppConfigService } from '../../service/appconfigservice';
 
 export interface MenuItem {
     name?: string;
+    label? : string;
     icon?: string;
+    items?: MenuItem[];
     children?: MenuItem[];
     routerLink?: string;
     href?: string;
@@ -22,14 +24,11 @@ export interface MenuItem {
 export class AppMenuComponent {
     @Input() active: boolean;
 
-    menu!: MenuItem[];
-
     config!: AppConfig;
 
     subscription!: Subscription;
 
     constructor(@Inject(PLATFORM_ID) private platformId: any, private configService: AppConfigService, private el: ElementRef, private router: Router) {
-        this.menu = MenuData.data;
         this.config = this.configService.config;
         this.subscription = this.configService.configUpdate$.subscribe((config) => (this.config = config));
     }

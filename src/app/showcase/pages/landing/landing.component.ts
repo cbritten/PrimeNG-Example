@@ -9,6 +9,7 @@ import { AppComponent } from '../../layout/app.component';
 import { AppConfigService } from '../../service/appconfigservice';
 import { CustomerService } from '../../service/customerservice';
 import { NodeService } from '../../service/nodeservice';
+import { Router } from '@angular/router';
 
 interface City {
     name: string;
@@ -110,131 +111,125 @@ export class LandingComponent implements OnInit, OnDestroy {
     private window: Window;
 
     constructor(
-        @Inject(DOCUMENT) private document: Document,
-        @Inject(PLATFORM_ID) private platformId: any,
-        private renderer: Renderer2,
-        private nodeService: NodeService,
-        private customerService: CustomerService,
-        private configService: AppConfigService,
-        private cd: ChangeDetectorRef,
-        public app: AppComponent,
-        private metaService: Meta,
-        private titleService: Title
+        @Inject(DOCUMENT) private document: Document, @Inject(PLATFORM_ID) private platformId: any,
+        private renderer: Renderer2, private nodeService: NodeService, private customerService: CustomerService, private configService: AppConfigService,
+        private cd: ChangeDetectorRef, public app: AppComponent, private metaService: Meta, private titleService: Title, private router : Router
     ) {
         this.window = this.document.defaultView as Window;
     }
 
     ngOnInit() {
-        this.titleService.setTitle('PrimeNG - Angular UI Component Library');
-        this.metaService.updateTag({ name: 'description', content: 'The ultimate collection of design-agnostic, flexible and accessible Angular UI Components.' });
-        this.config = this.configService.config;
-        this.changeTableTheme(this.config.dark ? 'lara-dark-blue' : 'lara-light-blue');
-        this.configService.updateConfig({ ...this.config, ...{ theme: this.config.dark ? 'lara-dark-blue' : 'lara-light-blue' } });
+        this.router.navigateByUrl('/home')
+        // this.titleService.setTitle('PrimeNG - Angular UI Component Library');
+        // this.metaService.updateTag({ name: 'description', content: 'The ultimate collection of design-agnostic, flexible and accessible Angular UI Components.' });
+        // this.config = this.configService.config;
+        // this.changeTableTheme(this.config.dark ? 'lara-dark-blue' : 'lara-light-blue');
+        // this.configService.updateConfig({ ...this.config, ...{ theme: this.config.dark ? 'lara-dark-blue' : 'lara-light-blue' } });
 
-        this.chartData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-            datasets: [
-                {
-                    label: 'Income',
-                    data: [40, 59, 40, 50, 56, 40, 70],
-                    fill: true,
-                    borderColor: '#03C4E8',
-                    tension: 0.4,
-                    backgroundColor: 'rgba(3, 196, 232, .2)'
-                }
-            ]
-        };
+        // this.chartData = {
+        //     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        //     datasets: [
+        //         {
+        //             label: 'Income',
+        //             data: [40, 59, 40, 50, 56, 40, 70],
+        //             fill: true,
+        //             borderColor: '#03C4E8',
+        //             tension: 0.4,
+        //             backgroundColor: 'rgba(3, 196, 232, .2)'
+        //         }
+        //     ]
+        // };
 
-        this.chartOptions = {
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    ticks: {
-                        display: false
-                    },
-                    min: 0,
-                    max: 100
-                },
-                x: {
-                    ticks: {
-                        display: false
-                    }
-                }
-            }
-        };
+        // this.chartOptions = {
+        //     plugins: {
+        //         legend: {
+        //             display: false
+        //         }
+        //     },
+        //     scales: {
+        //         y: {
+        //             ticks: {
+        //                 display: false
+        //             },
+        //             min: 0,
+        //             max: 100
+        //         },
+        //         x: {
+        //             ticks: {
+        //                 display: false
+        //             }
+        //         }
+        //     }
+        // };
 
-        this.selectButtonOptions = [
-            { label: 'Prime', value: 1 },
-            { label: 'Angular', value: 2 },
-            { label: 'Themes', value: 3 }
-        ];
+        // this.selectButtonOptions = [
+        //     { label: 'Prime', value: 1 },
+        //     { label: 'Angular', value: 2 },
+        //     { label: 'Themes', value: 3 }
+        // ];
 
-        this.items = [
-            { label: 'Home', icon: 'pi pi-fw pi-home' },
-            { label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
-            { label: 'Settings', icon: 'pi pi-fw pi-cog' }
-        ];
+        // this.items = [
+        //     { label: 'Home', icon: 'pi pi-fw pi-home' },
+        //     { label: 'Calendar', icon: 'pi pi-fw pi-calendar' },
+        //     { label: 'Settings', icon: 'pi pi-fw pi-cog' }
+        // ];
 
-        this.nodeService.getFiles().then((files) => (this.treeData = files));
+        // this.nodeService.getFiles().then((files) => (this.treeData = files));
 
-        this.customerService.getCustomersLarge().then((customers) => {
-            this.customers = customers;
-            this.loading = false;
-        });
+        // this.customerService.getCustomersLarge().then((customers) => {
+        //     this.customers = customers;
+        //     this.loading = false;
+        // });
 
-        this.representatives = [
-            { name: 'Amy Elsner', image: 'amyelsner.png' },
-            { name: 'Anna Fali', image: 'annafali.png' },
-            { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
-            { name: 'Bernardo Dominic', image: 'bernardodominic.png' },
-            { name: 'Elwin Sharvill', image: 'elwinsharvill.png' },
-            { name: 'Ioni Bowcher', image: 'ionibowcher.png' },
-            { name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png' },
-            { name: 'Onyama Limba', image: 'onyamalimba.png' },
-            { name: 'Stephen Shaw', image: 'stephenshaw.png' },
-            { name: 'XuXue Feng', image: 'xuxuefeng.png' }
-        ];
+        // this.representatives = [
+        //     { name: 'Amy Elsner', image: 'amyelsner.png' },
+        //     { name: 'Anna Fali', image: 'annafali.png' },
+        //     { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
+        //     { name: 'Bernardo Dominic', image: 'bernardodominic.png' },
+        //     { name: 'Elwin Sharvill', image: 'elwinsharvill.png' },
+        //     { name: 'Ioni Bowcher', image: 'ionibowcher.png' },
+        //     { name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png' },
+        //     { name: 'Onyama Limba', image: 'onyamalimba.png' },
+        //     { name: 'Stephen Shaw', image: 'stephenshaw.png' },
+        //     { name: 'XuXue Feng', image: 'xuxuefeng.png' }
+        // ];
 
-        this.statuses = [
-            { label: 'Unqualified', value: 'unqualified' },
-            { label: 'Qualified', value: 'qualified' },
-            { label: 'New', value: 'new' },
-            { label: 'Negotiation', value: 'negotiation' },
-            { label: 'Renewal', value: 'renewal' },
-            { label: 'Proposal', value: 'proposal' }
-        ];
+        // this.statuses = [
+        //     { label: 'Unqualified', value: 'unqualified' },
+        //     { label: 'Qualified', value: 'qualified' },
+        //     { label: 'New', value: 'new' },
+        //     { label: 'Negotiation', value: 'negotiation' },
+        //     { label: 'Renewal', value: 'renewal' },
+        //     { label: 'Proposal', value: 'proposal' }
+        // ];
 
-        this.fonts = [
-            {
-                label: 'Arial',
-                value: 'Arial,Helvetica Neue,Helvetica,sans-serif'
-            },
-            {
-                label: 'System',
-                value: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol'
-            },
-            {
-                label: 'Trebuches MS',
-                value: 'Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif'
-            },
-            {
-                label: 'Verdana',
-                value: 'Verdana,Geneva,sans-serif'
-            }
-        ];
+        // this.fonts = [
+        //     {
+        //         label: 'Arial',
+        //         value: 'Arial,Helvetica Neue,Helvetica,sans-serif'
+        //     },
+        //     {
+        //         label: 'System',
+        //         value: '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol'
+        //     },
+        //     {
+        //         label: 'Trebuches MS',
+        //         value: 'Trebuchet MS,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Tahoma,sans-serif'
+        //     },
+        //     {
+        //         label: 'Verdana',
+        //         value: 'Verdana,Geneva,sans-serif'
+        //     }
+        // ];
 
-        this.cities = [
-            { name: 'New York', code: 'NY' },
-            { name: 'Rome', code: 'RM' },
-            { name: 'London', code: 'LDN' },
-            { name: 'Paris', code: 'PRS' }
-        ];
+        // this.cities = [
+        //     { name: 'New York', code: 'NY' },
+        //     { name: 'Rome', code: 'RM' },
+        //     { name: 'London', code: 'LDN' },
+        //     { name: 'Paris', code: 'PRS' }
+        // ];
 
-        this.bindScrollListener();
+        // this.bindScrollListener();
     }
 
     copyNpm() {

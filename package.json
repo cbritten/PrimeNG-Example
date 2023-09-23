@@ -4,7 +4,7 @@
     "license": "SEE LICENSE IN LICENSE.md",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve", 
+        "start": "ng serve",
         "test": "ng test",
         "test:headless": "ng test --watch=false --browsers=ChromeHeadless",
         "e2e": "ng e2e",
@@ -53,6 +53,7 @@
         "@types/jest": "^29.5.1",
         "@types/node": "^12.20.55",
         "chart.js": "3.3.2",
+        "chartjs-plugin-datalabels": "^2.2.0",
         "codelyzer": "^0.0.28",
         "del": "^7.0.0",
         "domino": "^2.1.6",

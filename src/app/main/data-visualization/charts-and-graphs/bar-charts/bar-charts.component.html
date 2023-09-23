@@ -1,0 +1,49 @@
+<div class="card">
+    <div class="grid pt-3">
+        <div class="col-6 md:col-6">
+            <p-chart class="block m-auto w-8" type="bar" [data]="barChartData" [options]="verticalBarOptions"></p-chart>
+        </div>
+        <div class="col-4 md:col-4">
+            <p-chart class="h-full" type="bar" [data]="barChartData" [options]="horizontalBarOptions"></p-chart>
+        </div>
+    </div>
+    <button pButton pRipple class="pi pi-cog icon-button flex ml-auto" (click)="filterMenu.show($event)"></button>
+</div>
+
+<!-- -----------------------------------------------
+------------POPUPS START HERE------------------
+----------------------------------------------- -->
+<p-overlayPanel #filterMenu styleClass="w-4">
+    <h3 class="text-primary">Vertical Bar Chart Options</h3>
+    <hr>
+    <div class="grid">
+        <div class="col-5 flex">
+            <span class="mr-2 flex mt-2">Stacked Vertical Bars</span> 
+            <p-selectButton [options]="['On', 'Off']" [(ngModel)]="stackedVerticalBars" (onChange)="setChartOptions()"></p-selectButton>
+        </div>
+        <div class="col-7 flex">
+            <span class="mr-2 flex mt-2">Chart Legend Position</span> 
+            <p-selectButton [options]="justifyOptions" [(ngModel)]="verticalLegendPosition" (onChange)="setChartOptions()">
+                <ng-template let-value pTemplate>
+                    <i [class]="value.class"></i>
+                </ng-template>
+            </p-selectButton>
+        </div>
+    </div>
+    <h3 class="text-primary">Horizontal Bar Chart Options</h3>
+    <hr>
+    <div class="grid">
+        <div class="col-5 flex">
+            <span class="mr-2 flex mt-2">Stacked Horizontal Bars</span> 
+            <p-selectButton [options]="['On', 'Off']" [(ngModel)]="stackedHorizontalBars" (onChange)="setChartOptions()"></p-selectButton>
+        </div>
+        <div class="col-7 flex">
+            <span class="mr-2 flex mt-2">Chart Legend Position</span> 
+            <p-selectButton [options]="justifyOptions" [(ngModel)]="horizontalLegendPosition" (onChange)="setChartOptions()">
+                <ng-template let-value pTemplate>
+                    <i [class]="value.class"></i>
+                </ng-template>
+            </p-selectButton>
+        </div>
+    </div>
+</p-overlayPanel>

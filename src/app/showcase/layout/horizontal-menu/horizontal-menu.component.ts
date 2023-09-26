@@ -11,7 +11,7 @@ export class HorizontalMenuComponent {
     // {label: '', icon: 'pi pi-home'},
     {label: 'Data Visualization', icon: '', items: [
         {label: 'Charts and Graphs', icon : '', routerLink: ['data-visualization/charts-and-graphs/pie-and-doughnut-charts']},
-        {label: 'Data Tables', icon : '', routerLink: ['data-visualization/data-tables']},
+        {label: 'Data Tables', icon : '', routerLink: ['data-visualization/data-tables/organizational-example']},
     ]},
     {label: 'Input', icon: '', items: [
         {label: 'Forms and Popups', icon : '', routerLink: ['']},

@@ -1,0 +1,33 @@
+.badge {
+    padding: .25rem;
+    border-radius: 8px;
+    font-weight: 600;
+    &.success{
+        color: var(--green-700); 
+        background: var(--green-200);
+    }
+    &.info{
+        color: var(--blue-700); 
+        background: var(--blue-200);
+    }
+    &.pending{
+        color: var(--indigo-700); 
+        background: var(--indigo-200);
+    }
+    &.renew{
+        color: var(--teal-700); 
+        background: var(--teal-200);
+    }
+    &.new{
+        color: var(--purple-700); 
+        background: var(--purple-200);
+    }
+    &.warn {
+        color: var(--yellow-700); 
+        background: var(--yellow-200);
+    }
+    &.fail {
+        color: var(--red-700); 
+        background: var(--red-200);
+    }
+}

@@ -1,0 +1,98 @@
+<div class="card">
+    <p-table #dt1 [value]="tableData" dataKey="{{selectedGrouping.dataKey}}" [rows]="10" [paginator]="true" emptyMessage="No data available at this time"
+    [loading]="loading" [rowHover]="true" rowGroupMode="rowSpan" groupRowsBy="id" [customSort]="false" 
+    [columns]="tableHeaders" [resizableColumns]="true" columnResizeMode="fit" sortField="representative.name" sortMode="single"
+    rowGroupMode="{{selectedGrouping.type}}" groupRowsBy="{{selectedGrouping.dataKey}}" 
+    [globalFilterFields]="['company', 'name', 'id', 'representative.name', 'status', 'country.name']"
+    scrollHeight="40rem" scrollDirection="horizontal" responsiveLayout="scroll" [scrollable]="true" [responsive]="true" 
+    class="p-5 flex justify-content-center" styleClass="p-datatable-gridlines p-datatable-striped" [tableStyle]="{'min-width': '100rem'}"
+    currentPageReportTemplate="Displaying {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" [rowsPerPageOptions]="paginationOptions">
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+            <span class="flex align-items-center ml-auto mr-2">Row Grouping Type : </span>
+            <p-selectButton class="mr-auto" [options]="groupingTypes" [(ngModel)]="selectedGrouping" optionLabel="label" (onChange)="changeGrouping()"></p-selectButton>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let headers of tableHeaders" class="'flex justify-content-center' + {{headers.class}}" alignFrozen="{{headers.alignFrozen}}" 
+                    pfrozenColumn [frozen]="headers.frozen">
+                    {{headers.label}}
+                    <p-columnFilter *ngIf="headers.filter && !headers.customFilter" type="{{headers.filterType}}" field="{{headers.filterField}}" display="menu">
+                    </p-columnFilter>
+                    <p-columnFilter *ngIf="headers.filter && headers.customFilter" type="{{headers.filterType}}" field="{{headers.filterField}}" display="menu"
+                        [showOperator]="false" [showApplyButton]="false" [showClearButton]="false" [showAddButton]="false">
+                        <ng-template pTemplate="body" *ngIf="headers.filterType=='boolean'">
+                            <div class="flex">
+                                <span class="mr-2">Toggle Verified Clients</span>
+                                <p-triStateCheckbox class="flex align-items-center" [(ngModel)]="verifiedToggleBool" inputId="tricheckbox" (onChange)="verifiedToggle()"></p-triStateCheckbox>
+                            </div>
+                        </ng-template>
+                        <ng-template pTemplate="body" *ngIf="headers.label=='Status'">
+                            <div class="flex">
+                                <p-multiSelect [options]="statuses" [(ngModel)]="selectedStatus" optionLabel="status" [filter]="false" display="chip" (onChange)="filterStatus()"></p-multiSelect>
+                            </div>
+                        </ng-template>
+                    </p-columnFilter>
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="groupheader" let-tableData>
+            <tr pRowGroupHeader>
+                <td colspan="8" class="custom-group-header">
+                    <span class="font-bold text-lg">
+                        {{tableData.representative.name}}
+                    </span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-tableData let-rowgroup="rowgroup" let-rowspan="rowspan">
+            <tr>
+                <!-- Only show this td for rowspan -->
+                <td *ngIf="rowgroup && selectedGrouping.type=='rowspan'" [attr.rowspan]="rowspan" >
+                    <img src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" [class]="'mr-2 flag flag-' + tableData.country.code" style="width: 20px" />
+                    <span>{{tableData.country.name}}</span>
+                </td>
+                <td>{{tableData.id}}</td>
+                <td>{{tableData.name}}</td>
+                <td>{{tableData.company}}</td>
+                <td>{{tableData.date | date}}</td>
+                <td><span [ngClass]="setStatusClass(tableData.status)">{{tableData.status}}</span></td>
+                <td>
+                    <span *ngIf="tableData.verified"><i class="pi pi-check-circle text-green-400"></i></span>
+                    <span *ngIf="!tableData.verified"><i class="pi pi-times-circle text-red-400"></i></span>
+                </td>
+                <td><p-slider [(ngModel)]="tableData.activity" [disabled]="true"></p-slider></td>
+                <td>{{tableData.balance | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="groupfooter" let-tableData>
+            <tr class="custom-group-footer">
+                <td colspan="3" class="font-bold pr-6">
+                    <span class="w-4">Total Clients : {{calculateCategoryFooter(tableData.representative.name).count}}</span>
+                </td>
+                <td colspan="2" class="font-bold pr-6">
+                    <span class="w-4">Total Unqualified : {{calculateCategoryFooter(tableData.representative.name).unqualified}}</span>
+                </td>
+                <td colspan="1" class="font-bold pr-6">
+                    <span class="w-4" [ngClass]="(calculateCategoryFooter(tableData.representative.name).verifiedPerc) > 75 ? 'text-green-400 font-semibold' : 'text-red-400 font-semibold'">
+                        Verified : {{(calculateCategoryFooter(tableData.representative.name).verifiedPerc).toFixed(0)}}%
+                    </span>
+                </td>
+                <td colspan="2" class="font-bold pr-6">
+                    <span class="w-4">Total Balance : {{calculateCategoryFooter(tableData.representative.name).balance | currency : 'USD' : 'symbol': '1.0-0'}}</span>
+                </td>
+            </tr>
+        </ng-template>
+        <!-- <ng-template pTemplate="summary">
+            <div class="flex align-items-center justify-content-between">
+                In total there are {{products ? products.length : 0 }} products.
+            </div>
+        </ng-template> -->
+    </p-table>
+</div>

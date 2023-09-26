@@ -1,0 +1,141 @@
+<div class="card">
+    <p-table #dt1 [value]="tableData" dataKey="tableData.id" [rows]="10" [paginator]="true" emptyMessage="No data available at this time"
+    [loading]="loading" [rowHover]="true" rowGroupMode="rowSpan" groupRowsBy="id" [customSort]="false" 
+    [columns]="tableHeaders" [resizableColumns]="true" columnResizeMode="fit"
+    rowGroupMode="subheader" groupRowsBy="category" [globalFilterFields]="['rating', 'name', 'id', 'inventoryStatus']"
+    scrollHeight="40rem" scrollDirection="horizontal" responsiveLayout="scroll" [scrollable]="true" [responsive]="true" 
+    class="p-5 flex justify-content-center" styleClass="p-datatable-gridlines p-datatable-striped" [tableStyle]="{'min-width': '100rem'}"
+    currentPageReportTemplate="Displaying {first} to {last} of {totalRecords} entries" [showCurrentPageReport]="true" [rowsPerPageOptions]="paginationOptions">
+    <ng-template pTemplate="caption">
+        <div class="flex">
+            <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="clear(dt1)"></button>
+            <i class="pi pi-shopping-cart shopping-cart-icon" (click)="cartVisible=true"></i>
+            <p-badge class="shopping-cart-badge" [value]="yourCart.length"></p-badge>
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Search keyword" />
+            </span>
+        </div>
+    </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th *ngFor="let headers of tableHeaders" class="'flex justify-content-center' + {{headers.class}}" alignFrozen="{{headers.alignFrozen}}" 
+                    pfrozenColumn [frozen]="headers.frozen">
+                    {{headers.label}}
+                    <p-columnFilter *ngIf="headers.filter && !headers.customFilter" type="{{headers.filterType}}" field="{{headers.filterField}}" display="menu"
+                    [showOperator]="false" [showApplyButton]="false" [showClearButton]="false" [showAddButton]="false">
+                        <ng-template pTemplate="body" *ngIf="headers.filterType=='boolean'">
+                            <div class="flex">
+                                <span class="mr-2">Toggle Out Of Stock Inventory</span>
+                                <p-triStateCheckbox class="flex align-items-center" [(ngModel)]="stockToggleBool" inputId="tricheckbox" (onChange)="stockToggle()"></p-triStateCheckbox>
+                            </div>
+                        </ng-template>
+                    </p-columnFilter>
+                    <p-columnFilter field="{{headers.filterField}}" *ngIf="headers.filter && headers.customFilter" display="menu" [showMatchModes]="false"
+                    [showOperator]="false" [showApplyButton]="false" [showClearButton]="false" [showAddButton]="false">
+                        <ng-template pTemplate="filter" let-filter="filterCallback">
+                            <p-rating class="flex justify-content-center" (onRate)="filterRating()" [(ngModel)]="filteredRating" [cancel]="false"></p-rating>
+                        </ng-template>
+                    </p-columnFilter>
+
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="groupheader" let-tableData>
+            <tr pRowGroupHeader>
+                <td colspan="6" class="custom-group-header">
+                    <span class="font-bold text-lg">
+                        {{tableData.category}}
+                    </span>
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-tableData>
+            <tr>
+                <!-- <td>{{tableData.category}}</td> -->
+                <td>{{tableData.id}}</td>
+                <td pTooltip="<img src='{{tableData.src}}'/>" [escape]="false" tooltipPosition="top">{{tableData.name}}</td>
+                <td>{{tableData.price | currency : 'USD' : 'symbol' : '1.0-0'}}</td>
+                <td class="flex">
+                    <span class="mx-auto">{{tableData.quantity}}</span>
+                    <i class="pi pi-cart-plus text-xl" (click)="addToCart(tableData)"
+                        [ngClass]="tableData.inventoryStatus=='OUTOFSTOCK'? 'opacity-40 cursor-auto text-primary-400' : 'cursor-pointer text-primary-700'">
+                    </i>
+                </td>
+                <td>
+                    <span [ngClass]="setInventoryStatusClass(tableData.inventoryStatus)">
+                        {{tableData.inventoryStatus}}
+                    </span>
+                </td>
+                <td><p-rating [(ngModel)]="tableData.rating" [readonly]="true" [cancel]="false"></p-rating></td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="groupfooter" let-tableData>
+            <tr class="custom-group-footer">
+                <td colspan="2" class="font-bold pr-6">
+                    <span class="w-4">Total {{tableData.category}}: {{calculateCategoryFooter(tableData.category).count}}</span>
+                </td>
+                <td colspan="2" class="font-bold pr-6">
+                    <span class="w-4">Potential Revenue : {{calculateCategoryFooter(tableData.category).revenue | currency : 'USD' : 'symbol' : '1.0-0'}}</span>
+                </td>
+                <td colspan="1" class="font-bold pr-6">
+                    <span class="w-4">Inventory : {{calculateCategoryFooter(tableData.category).inventory}}</span>
+                </td>
+                <td colspan="1" class="font-bold pr-6">
+                    <span class="w-4">Average Rating : <p-rating [(ngModel)]="calculateCategoryFooter(tableData.category).averageRating" [readonly]="true" [cancel]="false"></p-rating></span>
+                </td>
+
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+<!-- 
+______________________________________________
+____________POPUPS START HERE_________________
+______________________________________________ 
+-->
+<!-- CART POPUP -->
+<p-dialog [(visible)]="cartVisible" [style]="{width: '38vw'}">
+    <ng-template pTemplate="header">
+        <div class="cursor-auto">
+            <span class="text-xl font-bold mr-2">Your Cart</span>
+            <i class="pi pi-trash text-2xl text-primary-700 cursor-pointer" pTooltip="Empty your cart" (click)="emptyCart()"></i>
+        </div>
+    </ng-template>
+    <div class="grid pt-3">
+        <div class="col-12 md:col-12 flex" *ngFor="let item of yourCart; let i=index">
+            <div class="col-4 md:col-4">
+                <img [src]="item.src">
+                <div class="flex text-sm">
+                    <i class="pi pi-trash text-red-500 cursor-pointer flex align-items-center" pTooltip="Remove {{item.name}}" (click)="removeItem(item, i)"></i>   
+                    <span class="font-italic ml-auto">{{item.orders.length}} purchased in the last year</span>
+                </div>
+            </div>
+            <div class="col-6 md:col-6 flex">
+                <div class="col-12">
+                    <span class="text-xl font-bold">{{item.name}}</span>
+                    <div class="flex">
+                        <div class="p-inputgroup w-full md:w-10rem mr-2">
+                            <span class="p-inputgroup-addon" (click)="subtractItemQuantity(item)"><i class="pi pi-minus"></i></span>
+                            <input type="text" class="text-center" pInputText placeholder="Quantity" [(ngModel)]="item.cartQuantity" />
+                            <span class="p-inputgroup-addon" (click)="addItemQuantity(item)"><i class="pi pi-plus"></i></span>  
+                        </div>
+                    </div>
+                    <span class="text-2xl font-bold text-green-600">{{item.price | currency : 'USD' : 'symbol' : '1.0-0'}}</span>
+                </div>
+            </div>
+            <div class="col-2 md:col-2 mt-auto text-right">
+                <span class="text-xl font-bold">Item Sub-Total: </span><br>
+                <span class="text-2xl font-bold text-green-600 flex justify-content-end">{{item.itemSubTotal | currency : 'USD' : 'symbol' : '1.0-0'}}</span>
+            </div>
+        </div>
+    </div>
+</p-dialog>
+<!-- TOAST POPUP -->
+<p-toast position="top-center" key="toastMessage" [baseZIndex]="99999"></p-toast>
+<!-- 
+______________________________________________
+_____________POPUPS END HERE__________________
+______________________________________________ 
+-->

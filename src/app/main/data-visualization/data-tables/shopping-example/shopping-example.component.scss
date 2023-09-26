@@ -1,0 +1,13 @@
+.shopping-cart-icon {
+    cursor: pointer; 
+    margin-left: auto; 
+    display: flex; 
+    align-items: center; 
+    font-size: 30px;
+    color: var(--primary-700);
+}
+.shopping-cart-badge{
+    position: relative;
+    margin-right: .5rem;
+    left: -10px;
+}

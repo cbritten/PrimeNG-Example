@@ -6,6 +6,8 @@ import { DataTablesComponent } from './data-tables/data-tables.component';
 import { PieAndDoughnutChartsComponent } from './charts-and-graphs/pie-and-doughnut-charts/pie-and-doughnut-charts.component';
 import { BarChartsComponent } from './charts-and-graphs/bar-charts/bar-charts.component';
 import { LineChartsComponent } from './charts-and-graphs/line-charts/line-charts.component';
+import { OrganizationExmapleComponent } from './data-tables/organization-exmaple/organization-exmaple.component';
+import { ShoppingExampleComponent } from './data-tables/shopping-example/shopping-example.component';
 
 const routes: Routes = [
   {path: '', component: DataVisualizationComponent, children:[
@@ -14,7 +16,10 @@ const routes: Routes = [
       {path: 'bar-charts', component: BarChartsComponent},
       {path: 'line-charts', component: LineChartsComponent},
     ]},
-    {path : 'data-tables', component: DataTablesComponent}
+    {path : 'data-tables', component: DataTablesComponent, children:[
+      {path: 'organizational-example', component: OrganizationExmapleComponent},
+      {path: 'shopping-example', component: ShoppingExampleComponent}
+    ]}
   ]}
 ];
 

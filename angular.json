@@ -125,8 +125,8 @@
                             "src/upload.php"
                         ],
                         "styles": [
-                            "src/styles.scss",
-                            "src/assets/components/themes/lara-light-blue/theme.css"
+                            "src/assets/components/themes/main-light/theme.css",
+                            "src/styles.scss"
                         ],
                         "scripts": []
                     }

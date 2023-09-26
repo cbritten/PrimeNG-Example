@@ -15,6 +15,21 @@ import { ToastModule } from 'primeng/toast';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
+import { TableModule } from 'primeng/table';
+import { RatingModule } from 'primeng/rating';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { TooltipModule } from 'primeng/tooltip';
+import { RippleModule } from 'primeng/ripple';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TriStateCheckboxModule } from 'primeng/tristatecheckbox';
+import { OrganizationExmapleComponent } from './data-tables/organization-exmaple/organization-exmaple.component';
+import { ShoppingExampleComponent } from './data-tables/shopping-example/shopping-example.component';
+import { SliderModule } from 'primeng/slider';
+import { BadgeModule } from 'primeng/badge';
+import { MessageService } from 'primeng/api';
+import { CheckboxModule } from 'primeng/checkbox';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 
 @NgModule({
@@ -25,6 +40,8 @@ import { FormsModule } from '@angular/forms';
     PieAndDoughnutChartsComponent,
     BarChartsComponent,
     LineChartsComponent,
+    OrganizationExmapleComponent,
+    ShoppingExampleComponent,
   ],
   imports: [
     CommonModule,
@@ -35,8 +52,19 @@ import { FormsModule } from '@angular/forms';
     ToastModule, 
     FormsModule,
     OverlayPanelModule,
-    SelectButtonModule
-
+    SelectButtonModule,
+    TableModule,
+    RatingModule,
+    ButtonModule, 
+    InputTextModule, 
+    TooltipModule, 
+    RippleModule,
+    MultiSelectModule,
+    TriStateCheckboxModule,
+    SliderModule,
+    BadgeModule,
+    CheckboxModule, 
+    RadioButtonModule,
   ]
 })
 export class DataVisualizationModule { }

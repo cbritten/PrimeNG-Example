@@ -147,6 +147,8 @@ export class ShoppingExampleComponent implements OnInit{
     this.yourCart = []; 
   }
   removeItem(item : any, index : any){
+    this.tableData.find((entry : any) => {return entry.name == item.name}).quantity += item.cartQuantity; 
+    this.calculateCategoryFooter(item.category); 
     this.yourCart.splice(index, 1); 
   }
 }

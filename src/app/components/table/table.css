@@ -190,6 +190,7 @@
     text-decoration: none;
     overflow: hidden;
     position: relative;
+    margin-left: .25rem; 
 }
 
 .p-column-filter-overlay {
@@ -244,4 +245,13 @@
     position: sticky;
     top: 0;
     left: 0;
+}
+.custom-group-header{
+    
+}
+.custom-group-footer{
+    background: var(--primary-color) !important; 
+    opacity: .6;
+    color: #ffffff !important;
+    text-align: center;
 }

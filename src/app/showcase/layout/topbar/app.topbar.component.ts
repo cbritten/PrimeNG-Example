@@ -55,19 +55,19 @@ export class AppTopBarComponent implements OnInit, OnDestroy {
 
         if (isPlatformBrowser(this.platformId)) {
             this.bindScrollListener();
-            this.initDocSearch();
+            // this.initDocSearch();
         }
     }
 
-    initDocSearch() {
-        docsearch({
-            appId: 'XG1L2MUWT9',
-            apiKey: '6057fe1af77fee4e7e41907b0b3ec79d',
-            indexName: 'primeng',
-            container: '#docsearch',
-            transformItems: this.handleDocSearchTransformItems.bind(this)
-        });
-    }
+    // initDocSearch() {
+    //     docsearch({
+    //         appId: 'XG1L2MUWT9',
+    //         apiKey: '6057fe1af77fee4e7e41907b0b3ec79d',
+    //         indexName: 'primeng',
+    //         container: '#docsearch',
+    //         transformItems: this.handleDocSearchTransformItems.bind(this)
+    //     });
+    // }
 
     handleDocSearchTransformItems(results) {
         const valid = process.env.NODE_ENV !== 'production';

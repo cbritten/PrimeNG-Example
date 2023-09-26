@@ -27,6 +27,7 @@ import { AppTopbarModule } from '../layout/topbar/app.topbar.module';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { MenubarModule } from 'primeng/menubar';
 import { HorizontalMenuComponent } from './horizontal-menu/horizontal-menu.component';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [AppComponent, AppFooterComponent, AppMainComponent, HorizontalMenuComponent],
@@ -52,6 +53,7 @@ import { HorizontalMenuComponent } from './horizontal-menu/horizontal-menu.compo
         NodeService, 
         IconService, 
         CustomerService, 
+        MessageService, 
         PhotoService, 
         AppConfigService, 
         ProductService

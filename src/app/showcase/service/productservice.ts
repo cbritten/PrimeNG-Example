@@ -1241,6 +1241,18 @@ export class ProductService {
 
     constructor(private http: HttpClient) {}
 
+    getCategoryArrays() {
+        let data: any = this.getProductsData(); 
+        let returnArray: any = [];
+        for(let row of data) {
+            if(returnArray[row.category]){
+                returnArray[row.category].push(row); 
+            }else {
+                returnArray[row.category] = [row];
+            }
+        }
+        return returnArray; 
+    }
     getProductsMini() {
         return Promise.resolve(this.getProductsData().slice(0, 5));
     }

@@ -16,6 +16,7 @@ export class ShoppingExampleComponent implements OnInit{
   yourCart: any[] = [];  
   //boolean variables
   cartVisible: boolean = false; 
+  loading: boolean = true; 
   stockToggleBool: boolean; 
   //table variables
   tableData: any[] = []; 
@@ -30,8 +31,15 @@ export class ShoppingExampleComponent implements OnInit{
   ]; 
   pinnedTotalRow: any;
   paginationOptions: any = [10]; 
-  //boolean variables 
-  loading: boolean = true; 
+  //carousel variables
+  relatedItems: any[] = []; 
+  responsiveOptions: any[] = [
+    {breakpoint: '1200px', numVisible: 3, numScroll: 3},
+    {breakpoint: '1024px', numVisible: 3, numScroll: 3},
+    {breakpoint: '992px', numVisible: 2, numScroll: 2},
+    {breakpoint: '768px', numVisible: 2, numScroll: 2},
+    {breakpoint: '560px', numVisible: 1, numScroll: 1},
+  ]
 
   ngOnInit(): void {
     this.getTableData(); 
@@ -124,7 +132,6 @@ export class ShoppingExampleComponent implements OnInit{
       row.itemSubTotal = row.price; 
       this.yourCart.push(row); 
     }
-    console.log(this.yourCart); 
     this.calculateCategoryFooter(row.category); 
     this.messageService.clear(); 
     this.messageService.add({
@@ -138,17 +145,48 @@ export class ShoppingExampleComponent implements OnInit{
   addItemQuantity(item : any){
     item.cartQuantity++; 
     item.itemSubTotal += item.price; 
+    this.calculateCartTotal(); 
   }
   subtractItemQuantity(item : any){
     item.cartQuantity--; 
     item.itemSubTotal -= item.price; 
+    this.calculateCartTotal(); 
+  }
+  openCart() {
+    this.cartVisible = this.yourCart.length > 0 ? true : false; 
+    this.relatedItems = [];
+    let categoryArray: any = this.products.getCategoryArrays();
+    for(let item of this.yourCart) {
+      let randNum: any = this.randomIntFromInterval(0, categoryArray[item.category].length);
+      this.relatedItems.push(categoryArray[item.category][randNum]);
+    }
+    for(let i = this.relatedItems.length; i <=6; i++) {
+      let randNum: any = this.randomIntFromInterval(0, this.tableData.length);
+      if(!this.relatedItems.some((item: any) => {return item.name == this.tableData[randNum].name}) && this.tableData[randNum].inventoryStatus != 'OUTOFSTOCK'){
+        this.relatedItems.push(this.tableData[randNum]);
+      }
+ 
+    }
   }
   emptyCart(){
     this.yourCart = []; 
+    this.calculateCartTotal(); 
   }
   removeItem(item : any, index : any){
     this.tableData.find((entry : any) => {return entry.name == item.name}).quantity += item.cartQuantity; 
     this.calculateCategoryFooter(item.category); 
     this.yourCart.splice(index, 1); 
+    this.calculateCartTotal(); 
+  }
+  calculateCartTotal() {
+    let total: number = 0;
+    for(let item of this.yourCart) {
+      total += (item.cartQuantity * item.price); 
+    }
+    return total; 
+  }
+  //etc functions
+  randomIntFromInterval(min, max) { 
+    return Math.floor(Math.random() * (max - min + 1) + min)
   }
 }

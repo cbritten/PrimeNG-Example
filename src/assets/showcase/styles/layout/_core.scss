@@ -20,6 +20,29 @@ body {
     height : 100%;
     background-color: var(--surface-0);
 }
+.item-card{
+    width: fit-content;
+    height: 20rem;
+    background: var(--surface-300);
+    border-radius: 12px;
+    display: grid;
+    padding: .5rem 1rem;
+    text-align: center;
+    .header {
+        width: 100%;
+        font-weight: bold;
+        font-size: large;
+    }
+    .image{
+        width: 15rem;
+        height: auto
+    }
+    .total{
+        font-weight: bold;
+        font-size: large;
+        color: var(--green-600); 
+    }
+}
 
 a {
     text-decoration: none;

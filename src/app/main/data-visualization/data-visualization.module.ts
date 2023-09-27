@@ -30,6 +30,7 @@ import { BadgeModule } from 'primeng/badge';
 import { MessageService } from 'primeng/api';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { CarouselModule } from 'primeng/carousel';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     BadgeModule,
     CheckboxModule, 
     RadioButtonModule,
+    CarouselModule
   ]
 })
 export class DataVisualizationModule { }

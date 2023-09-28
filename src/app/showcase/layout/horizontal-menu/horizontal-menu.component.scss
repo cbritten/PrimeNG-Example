@@ -1,0 +1,14 @@
+.home-button {
+    font-size: x-large;
+    color: var(--text-color); 
+    margin-left: 1rem;
+    width: 3rem;
+    cursor: pointer;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    &:hover{
+        box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.6);
+    }
+}

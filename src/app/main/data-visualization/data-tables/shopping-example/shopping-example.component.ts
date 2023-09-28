@@ -154,6 +154,19 @@ export class ShoppingExampleComponent implements OnInit{
   }
   openCart() {
     this.cartVisible = this.yourCart.length > 0 ? true : false; 
+    this.getRelatedItems(); 
+  }
+  emptyCart(){
+    this.yourCart = []; 
+    this.calculateCartTotal(); 
+  }
+  removeItem(item : any, index : any){
+    this.tableData.find((entry : any) => {return entry.name == item.name}).quantity += item.cartQuantity; 
+    this.calculateCategoryFooter(item.category); 
+    this.yourCart.splice(index, 1); 
+    this.calculateCartTotal(); 
+  }
+  getRelatedItems(){
     this.relatedItems = [];
     let categoryArray: any = this.products.getCategoryArrays();
     for(let item of this.yourCart) {
@@ -165,17 +178,13 @@ export class ShoppingExampleComponent implements OnInit{
       if(!this.relatedItems.some((item: any) => {return item.name == this.tableData[randNum].name}) && this.tableData[randNum].inventoryStatus != 'OUTOFSTOCK'){
         this.relatedItems.push(this.tableData[randNum]);
       }
- 
     }
   }
-  emptyCart(){
-    this.yourCart = []; 
-    this.calculateCartTotal(); 
-  }
-  removeItem(item : any, index : any){
-    this.tableData.find((entry : any) => {return entry.name == item.name}).quantity += item.cartQuantity; 
-    this.calculateCategoryFooter(item.category); 
-    this.yourCart.splice(index, 1); 
+  addRelatedItem(item: any){
+    item.cartQuantity = 1; 
+    item.itemSubTotal = item.price; 
+    this.yourCart.push(item); 
+    this.getRelatedItems(); 
     this.calculateCartTotal(); 
   }
   calculateCartTotal() {

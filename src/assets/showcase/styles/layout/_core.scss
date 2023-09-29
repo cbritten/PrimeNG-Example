@@ -20,6 +20,9 @@ body {
     height : 100%;
     background-color: var(--surface-0);
 }
+.shadow-card{
+    background: var(--surface-300);
+}
 .item-card{
     width: fit-content;
     height: 20rem;

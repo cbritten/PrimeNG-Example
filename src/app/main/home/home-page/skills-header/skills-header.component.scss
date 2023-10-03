@@ -1,0 +1,16 @@
+.personal-header{
+    background: linear-gradient(0deg, rgba(255, 255, 255, .2), rgba(255, 255, 255, .2)), radial-gradient(77.36% 256.97% at 77.35% 57.52%, #FCEFB8 0%, #C3E3FA 100%);
+    padding: 1rem; 
+}
+.profile-picture{
+    height: 250px; 
+    width: 250px; 
+    border-radius: 200px;
+    margin-left: 2rem;
+}
+.information-icon{
+    display: flex;
+    justify-content: center;
+    top: -25px; 
+    position: relative;
+}

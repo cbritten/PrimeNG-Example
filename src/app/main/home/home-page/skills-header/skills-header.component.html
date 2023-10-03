@@ -1,0 +1,59 @@
+<div class="card">
+    <div class="personal-header">
+        <div class="col-12 md:col-12 flex">
+            <div class="col-2 md:col-2">
+                <img src="/assets/components/images/profile-picture.jpg" class="profile-picture">
+                <!-- <p-splitButton label="My Information" [model]="contactItems" styleClass="p-button-text mr-2 mb-2"></p-splitButton> -->
+                <p-speedDial class="information-icon" [model]="contactItems" direction="down" [radius]="80" type="semi-circle" showIcon="pi pi-info-circle" hideIcon="pi pi-info-circle"></p-speedDial>
+            </div>
+            <div class="col-10 md:col-10">
+                Hello! My name is Caleb Britten and I'm a software developer. I began my career in the software development field in February 2020. In that time I have
+                created several Angular applications written in Javascript/Typesript, HTML5, and CSS/SCSS. I have paired this with a RESTful API communicating with both a 
+                SQL and a MongoDB backend using services written in Java and Python. I have also utilized complementary software such as Postman, Tableau, UDeploy, GIT, 
+                OpenShift and many others. I am currently teaching myself React and plan to start SQL soon. 
+                <br>
+                <div class="col-12 flex mt-3">
+                    <div class="col-3">
+                        <h6 class="underline text-center">Frontend Languages</h6>
+                        <ul>
+                            <li *ngFor="let item of skillsArray.frontendLanguages" class="w-7 flex">
+                                {{item.name}} : 
+                                <p-rating class="ml-auto" [(ngModel)]="item.proficency" [cancel]="false" [readonly]="true"></p-rating>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                        <h6 class="underline text-center">Backend Languages</h6>
+                        <ul>
+                            <li *ngFor="let item of skillsArray.backendLanguages" class="w-7 flex">
+                                {{item.name}} : 
+                                <p-rating class="ml-auto" [(ngModel)]="item.proficency" [cancel]="false" [readonly]="true"></p-rating>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                        <h6 class="underline text-center">Skills</h6>
+                        <ul>
+                            <li *ngFor="let item of skillsArray.skills" class="w-7 flex">
+                                {{item.name}} : 
+                                <p-rating class="ml-auto" [(ngModel)]="item.proficency" [cancel]="false" [readonly]="true"></p-rating>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                        <h6 class="underline text-center">Tools</h6>
+                        <ul>
+                            <li *ngFor="let item of skillsArray.tools" class="w-7 flex">
+                                {{item.name}} : 
+                                <p-rating class="ml-auto" [(ngModel)]="item.proficency" [cancel]="false" [readonly]="true"></p-rating>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="flex">
+                    <button pButton pRipple class="pi pi-file-pdf icon-button flex ml-auto" pTooltip="Download Resume"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

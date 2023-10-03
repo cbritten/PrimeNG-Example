@@ -70,6 +70,7 @@ export class ShoppingExampleComponent implements OnInit{
   }
   getTableData() {
     this.tableData = this.products.getProductsWithOrdersData();
+    console.log(this.tableData); 
     this.modifyTableData();
     this.setPaginationOptions(this.tableData); 
     this.loading = false; 

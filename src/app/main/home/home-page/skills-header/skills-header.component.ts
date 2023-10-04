@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 
@@ -45,7 +45,7 @@ export class SkillsHeaderComponent implements OnInit{
     },
     {
       tooltipOptions: {
-        tooltipLabel: 'Export my resume'
+        tooltipLabel: 'Download my resume'
       },
         icon: 'pi pi-file-pdf',
         command: () => {
@@ -59,11 +59,15 @@ export class SkillsHeaderComponent implements OnInit{
   }
   //contact functions
   email() { 
-    let formData: FormGroup; 
-    formData = this.builder.group({
-    })
+    window.location.href = "mailto:britten.caleb@gmail.com"; 
   }
   exportResume() {
-
+    const link = document.createElement('a');
+    link.setAttribute('target', '_blank');
+    link.setAttribute('href', '/assets/components/files/resume2023.pdf');
+    link.setAttribute('download', `Caleb Britten's Resume 2023`);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
   }
 }

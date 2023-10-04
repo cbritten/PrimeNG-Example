@@ -135,7 +135,7 @@ ______________________________________________
             <span class="text-xl font-bold text-green-600">Total : {{calculateCartTotal() | currency : 'USD' : 'symbol': '1.0-0'}}</span>
         </div>
     </div>
-    <p-carousel [value]="relatedItems" [numVisible]="3" [numScroll]="3" [circular]="true" [autoplayInterval]="30000" [responsiveOptions]="responsiveOptions">
+    <p-carousel [value]="relatedItems" [numVisible]="3" [numScroll]="3" [circular]="true" [autoplayInterval]="54000" [responsiveOptions]="responsiveOptions">
         <ng-template pTemplate="header">
             <span class="text-2xl font-bold flex justify-content-center pb-3">Shoppers like you also like:</span>
         </ng-template>
@@ -145,6 +145,7 @@ ______________________________________________
                 <img class="image" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + item.image">
                 <span class="text-md font-italic">Only {{item.quantity}} left in stock!</span>
                 <span class="total">{{item.price | currency : 'USD' : 'symbol' : '1.0-0'}}</span>
+                <!-- <i class="pi pi-plus ml-auto text-primary-700" pTooltip="Add to cart" (click)="addRelatedItem(item)"></i> -->
             </div>
         </ng-template>
     </p-carousel>

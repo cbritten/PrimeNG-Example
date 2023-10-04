@@ -6,11 +6,11 @@ import { AppMainComponent } from './app.main.component';
 const routes: Routes = [
     { path: '', component: LandingComponent, pathMatch: 'full' },
     {
-        path: 'home',
+        path: '',
         component: AppMainComponent,
         children: [
-            {path: 'home', redirectTo: 'data-visualization/charts-and-graphs', pathMatch: 'full'},
-            // { path: 'installation', loadChildren: () => import('../pages/installation/installation.module').then((m) => m.InstallationModule) },
+            {path: '', redirectTo:'/home-page', pathMatch: 'full'},
+            {path: 'home-page', loadChildren: () => import('../../main/home/home.module').then(m => m.HomeModule)},
             {path: 'data-visualization', loadChildren: ()=> import('../../main/data-visualization/data-visualization.module').then(m => m.DataVisualizationModule)}
         ],
     },

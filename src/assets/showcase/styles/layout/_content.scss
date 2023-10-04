@@ -10,6 +10,16 @@
         @include card;
     }
 }
+.tab-card{
+    background: var(--surface-500); 
+    border: 1px solid var(--surface-border); 
+    padding: 0rem; 
+    box-shadow: var(--card-shadow);
+    justify-content: center;
+    &.last-child{
+        margin-bottom: 0;
+    }
+}
 .main-content{
     display: grid;
     margin-top: 5rem;

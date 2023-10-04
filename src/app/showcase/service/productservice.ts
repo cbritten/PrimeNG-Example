@@ -1242,9 +1242,10 @@ export class ProductService {
     constructor(private http: HttpClient) {}
 
     getCategoryArrays() {
-        let data: any = this.getProductsData(); 
+        let data: any = this.getProductsWithOrdersData(); 
         let returnArray: any = [];
         for(let row of data) {
+            row.src = 'https://primefaces.org/cdn/primeng/images/demo/product/' + row.image
             if(returnArray[row.category]){
                 returnArray[row.category].push(row); 
             }else {

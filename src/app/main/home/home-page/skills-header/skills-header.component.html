@@ -10,13 +10,13 @@
                 Hello! My name is Caleb Britten and I'm a software developer. I began my career in the software development field in February 2020. In that time I have
                 created several Angular applications written in Javascript/Typesript, HTML5, and CSS/SCSS. I have paired this with a RESTful API communicating with both a 
                 SQL and a MongoDB backend using services written in Java and Python. I have also utilized complementary software such as Postman, Tableau, UDeploy, GIT, 
-                OpenShift and many others. I am currently teaching myself React and plan to start SQL soon. 
+                OpenShift and many others. I am currently teaching myself React and plan to continue SQL soon. 
                 <br>
                 <div class="col-12 flex mt-3">
                     <div class="col-3">
                         <h6 class="underline text-center">Frontend Languages</h6>
                         <ul>
-                            <li *ngFor="let item of skillsArray.frontendLanguages" class="w-7 flex">
+                            <li *ngFor="let item of skillsArray.frontendLanguages" class="flex w-8">
                                 {{item.name}} : 
                                 <p-rating class="ml-auto" [(ngModel)]="item.proficency" [cancel]="false" [readonly]="true"></p-rating>
                             </li>
@@ -25,7 +25,7 @@
                     <div class="col-3">
                         <h6 class="underline text-center">Backend Languages</h6>
                         <ul>
-                            <li *ngFor="let item of skillsArray.backendLanguages" class="w-7 flex">
+                            <li *ngFor="let item of skillsArray.backendLanguages" class="flex w-8">
                                 {{item.name}} : 
                                 <p-rating class="ml-auto" [(ngModel)]="item.proficency" [cancel]="false" [readonly]="true"></p-rating>
                             </li>
@@ -34,7 +34,7 @@
                     <div class="col-3">
                         <h6 class="underline text-center">Skills</h6>
                         <ul>
-                            <li *ngFor="let item of skillsArray.skills" class="w-7 flex">
+                            <li *ngFor="let item of skillsArray.skills" class="flex w-8">
                                 {{item.name}} : 
                                 <p-rating class="ml-auto" [(ngModel)]="item.proficency" [cancel]="false" [readonly]="true"></p-rating>
                             </li>
@@ -43,7 +43,7 @@
                     <div class="col-3">
                         <h6 class="underline text-center">Tools</h6>
                         <ul>
-                            <li *ngFor="let item of skillsArray.tools" class="w-7 flex">
+                            <li *ngFor="let item of skillsArray.tools" class="flex w-8">
                                 {{item.name}} : 
                                 <p-rating class="ml-auto" [(ngModel)]="item.proficency" [cancel]="false" [readonly]="true"></p-rating>
                             </li>

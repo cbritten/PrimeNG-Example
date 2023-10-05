@@ -1,11 +1,12 @@
 .splash-logo {
-    left: 50%;
-    top: 50%;
+    left: 49%;
+    top: 47%;
     margin-left: -26px;
     margin-top: -26px;
     z-index: 2;
     position: absolute;
-    width: 54px;
+    width: 100px;
+    height: 100px;
 }
 
 .splash-loader,
@@ -17,7 +18,7 @@
   margin-top: -45px;
   position: absolute;
   vertical-align: middle;
-  background: #c3002f;
+  background: var(--blue-300);
   width: 90px;
   height: 90px;
   border-radius: 50%;

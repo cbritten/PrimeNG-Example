@@ -145,7 +145,7 @@ ______________________________________________
                 <img class="image" [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + item.image">
                 <span class="text-md font-italic">Only {{item.quantity}} left in stock!</span>
                 <span class="total">{{item.price | currency : 'USD' : 'symbol' : '1.0-0'}}</span>
-                <!-- <i class="pi pi-plus ml-auto text-primary-700" pTooltip="Add to cart" (click)="addRelatedItem(item)"></i> -->
+                <i class="pi pi-plus ml-auto text-primary-700" pTooltip="Add to cart" (click)="addRelatedItem(item)"></i>
             </div>
         </ng-template>
     </p-carousel>

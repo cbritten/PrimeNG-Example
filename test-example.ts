@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HomePageComponent } from './home-page.component';
 import { WebDriver, by, browser, element } from 'protractor';
 import { protractor } from 'protractor/built/ptor';
+import { HomePageComponent } from 'src/app/main/home/home-page/home-page.component';
 
-fdescribe('HomePageComponent', () => {
+describe('HomePageComponent', () => {
   let component: HomePageComponent;
   let fixture: ComponentFixture<HomePageComponent>;
 

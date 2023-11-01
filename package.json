@@ -52,8 +52,13 @@
         "@types/jasmine": "~4.3.1",
         "@types/jest": "^29.5.1",
         "@types/node": "^12.20.55",
+        "@wdio/jasmine-framework": "^8.20.5",
+        "@wdio/local-runner": "^8.20.5",
+        "@wdio/schematics": "^1.2.1",
+        "@wdio/spec-reporter": "^8.20.0",
         "chart.js": "3.3.2",
         "chartjs-plugin-datalabels": "^2.2.0",
+        "chromedriver": "^118.0.1",
         "codelyzer": "^0.0.28",
         "del": "^7.0.0",
         "domino": "^2.1.6",
@@ -89,11 +94,14 @@
         "tslib": "^2.5.0",
         "typedoc": "0.24.7",
         "typescript": "5.0.4",
+        "wdio-chromedriver-service": "^8.1.1",
         "xlsx": "^0.18.5",
         "zone.js": "~0.13.0"
     },
     "dependencies": {
         "@docsearch/js": "^3.3.4",
-        "@types/react": "^18.0.28"
+        "@types/react": "^18.0.28",
+        "node": "^21.0.0",
+        "selenium-webdriver": "^4.11.2"
     }
 }
